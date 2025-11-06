@@ -9,7 +9,6 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 :root {
             --primary: #00adb5;
             --background: #222831;
@@ -19,9 +18,11 @@
             --accent: #007f85;
             --border: #4B5563;
             --light: #007f85;
+            --gray-light: #374151;
         }
 *{
     font-family: noto kufi arabic, sans-serif;
+    box-sizing: border-box; 
 }
 body{
     background-color: var(--background);
@@ -37,20 +38,19 @@ hr{
 .headernav {
     position: sticky;
     display: flex;
-    justify-content:space-between; /* يخلي الاسم يسار (أو يمين بالعربية) والقائمة بالجهة الثانية */
-    align-items: center; /* يخليهم بنفس الارتفاع */
-    padding: 25px 0;
+    justify-content:space-between; 
+    align-items: center; 
+    padding: 25px 5%; 
     box-shadow: 0 4px 15px var(--primary);
     background-color: var(--background);
     top: 0;
     z-index: 1000;
     width: 100%;
     margin: 0 ;
-    
+    gap: 20px; 
 }
 .headernav span {
     font-size: 24px;
-    padding-right: 400px;
 }
 .headernav ul{
     position: absolute;
@@ -61,7 +61,7 @@ hr{
     gap:20px;
     left: 50%;
     transform: translateX(-50%);
-    
+    margin: 0; 
 }   
 .headernav ul li {
   position: relative;
@@ -84,8 +84,8 @@ hr{
 .headernav ul li::after {
   content: "";
   position: absolute;
-  bottom: -5px; /* المسافة تحت النص */
-  right: 0; /* يبدأ من اليمين */
+  bottom: -5px; 
+  right: 0; 
   width: 0;
   height: 2px;
   background-color: var(--primary);
@@ -93,7 +93,7 @@ hr{
 }
 
 .headernav ul li:hover::after {
-  width: 100%; /* يمتد لليسار */
+  width: 100%; 
 }
 .websitename {
   display: inline-flex;
@@ -102,19 +102,21 @@ hr{
   font-weight: bold;
   gap: 10px;
   font-family: "Noto Kufi Arabic", sans-serif;
+  flex-shrink: 0; 
 }
 
 .websitename::before {
-  content: "\f54e"; /* أيقونة المتجر */
+  content: "\f54e"; 
   font-family: "Font Awesome 6 Free";
   font-weight: 600;
   font-size: 25px;
-  color: #a6a0b8; /* لون الأيقونة */
+  color: #a6a0b8; 
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center; 
     background: var(--primary);
     color: white;
     padding: 10px 25px;
@@ -133,7 +135,7 @@ hr{
     box-shadow: 0 8px 20px var(--primary);
 }
 .btn i {
-    margin-left: 8px;
+    margin-left: 8px; 
 }
 
 .btn-outline {
@@ -141,7 +143,7 @@ hr{
     border: 2px solid var(--primary);
     color: var(--primary);
     box-shadow: none;
-    margin-right: 15px;
+    margin-right: 15px; 
 }
         
         .btn-outline:hover {
@@ -150,7 +152,7 @@ hr{
         }
 /* قسم الهيرو */
 .hero {
-    padding: 80px 0;
+    padding: 80px 5%; 
     background: var(--background);
     position: relative;
     overflow: hidden;
@@ -179,13 +181,19 @@ hr{
     background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
     opacity: 0.2;
 }
-
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; 
+}
 .hero-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     z-index: 2;
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
 .hero-text {
@@ -201,6 +209,7 @@ hr{
 
 .hero-image img {
     max-width: 100%;
+    height: auto; 
     border-radius: 20px;
     box-shadow: 0 20px 40px var(--primary);
     transform: perspective(800px) rotateY(-10deg);
@@ -277,16 +286,21 @@ hr{
       display: flex;
       justify-content: center;
       align-items: center;
+      background: #fff; 
+      padding: 10px;
     }
 
     .product-image img {
       width: 80%;
-      height: auto;
+      height: 100%; 
       object-fit: contain;
     }
 
     .product-info {
       padding: 20px;
+      display: flex; 
+      flex-direction: column; 
+      flex-grow: 1; 
     }
 
     .product-name {
@@ -307,6 +321,7 @@ hr{
       font-size: 0.9rem;
       margin-bottom: 15px;
       line-height: 1.6;
+      flex-grow: 1; 
     }
 
     .product-price {
@@ -336,7 +351,7 @@ hr{
       border-radius: 40px;
       padding: 12px 0;
       font-weight: 700;
-      cursor: default; /* الزر ما يشتغل */
+      cursor: pointer; 
       transition: opacity 0.3s ease;
     }
 
@@ -358,6 +373,7 @@ hr{
   gap: 40px;
   flex-wrap: wrap;
   transition: all 0.4s ease;
+  padding: 0 20px; 
 }
 
 .about-image {
@@ -396,6 +412,7 @@ hr{
   margin-bottom: 20px;
   color: var(--primary);
   position: relative;
+  text-align: right; 
 }
 
 .about-text h2::after {
@@ -407,6 +424,7 @@ hr{
   height: 3px;
   background: linear-gradient(to right, var(--primary), var(--primary-dark));
   border-radius: 3px;
+  transform: none; 
 }
 
 .about-text p {
@@ -435,79 +453,287 @@ hr{
   box-shadow: 0 8px 20px var(--primary);
 }
 
+/* --- بداية إضافات السلة --- */
+.cart-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+    margin-left: 15px; 
+}
+.cart-btn:hover {
+    color: var(--primary);
+}
+.cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -12px; 
+    background: var(--primary);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    transform: scale(1);
+}
+.cart-counter.hidden {
+    transform: scale(0);
+}
+
+/* المودال (النافذة الجانبية) للسلة */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 380px;
+    height: 100vh;
+    background: var(--background);
+    z-index: 1100;
+    box-shadow: 5px 0 15px rgba(0, 173, 181, 0.3);
+    border-right: 2px solid var(--primary); 
+    transform: translateX(-100%); 
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+.cart-modal.open {
+    transform: translateX(0); 
+}
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+.cart-header h3 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cart-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+}
+.cart-close-btn:hover {
+    color: var(--primary);
+}
+.cart-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+.cart-empty-msg {
+    color: var(--gray);
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 50px;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--border);
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.cart-item-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 5px 0;
+}
+.cart-item-price {
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 700;
+}
+.cart-item-remove-btn {
+    background: transparent;
+    border: 1px solid var(--gray);
+    color: var(--gray);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+.cart-item-remove-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    background: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.cart-footer .btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+.cart-footer .btn i {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+.cart-footer .btn-outline {
+    margin-right: 0; 
+    color: var(--text-color);
+    border-color: var(--gray);
+}
+.cart-footer .btn-outline:hover {
+    background: var(--gray);
+    color: var(--background);
+}
+#cart-total {
+    font-weight: bold;
+}
+/* خلفية سوداء شفافة عند فتح السلة */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+/* --- نهاية إضافات السلة --- */
+
+
 /* --- بداية كود الجوال (الإضافة الضرورية) --- */
-/* هذا الكود سيعمل فقط على الشاشات التي عرضها 768 بكسل أو أقل */
+@media (max-width: 992px) {
+    /* تعديل الهيدر ليصبح أكثر مرونة */
+    .headernav {
+        padding: 20px 5%;
+    }
+    .headernav ul {
+        position: static;
+        transform: none;
+        left: auto;
+        justify-content: flex-start; 
+        flex-grow: 1;
+    }
+    .headernav span {
+        padding-right: 0; 
+    }
+}
+
 @media (max-width: 768px) {
     
     /* 1. إصلاح الهيدر */
     .headernav {
-        padding: 15px 20px; /* تقليل البادينج ليناسب الجوال */
-        flex-direction: column; /* جعل اللوجو والقائمة تحت بعض */
-        gap: 15px; /* إضافة مسافة بينهم */
+        padding: 15px 20px; 
+        flex-wrap: wrap; 
+        justify-content: space-between; 
+        gap: 15px; 
     }
     
     .headernav span {
-        padding-right: 0; /* إزالة البادينج الثابت (400 بكسل) الذي يسبب المشكلة */
+        padding-right: 0; 
+        order: 1; 
     }
-    
+    .cart-btn {
+        order: 2; 
+        margin-left: 0;
+    }
     .headernav ul {
-        position: static; /* إلغاء التموضع المطلق ليأخذ مكانه الطبيعي */
-        transform: none; /* إلغاء التحويل */
-        left: auto;
-        flex-wrap: wrap; /* للسماح للقائمة بالالتفاف إذا كانت ضيقة */
-        justify-content: center; /* توسيط القائمة */
+        order: 3; 
+        width: 100%; 
+        flex-wrap: wrap; 
+        justify-content: center; 
     }
 
     /* 2. إصلاح قسم الهيرو */
     .hero {
-        padding: 40px 20px; /* تقليل البادينج ليتناسب مع الجوال */
+        padding: 40px 20px; 
     }
 
     .hero-content {
-        flex-direction: column; /* جعل النص والصورة تحت بعض */
-        text-align: center; /* توسيط كل شيء في الهيرو */
+        flex-direction: column; 
+        text-align: center; 
     }
     
     .hero-text {
-        padding-right: 0; /* إزالة البادينج الجانبي */
-        margin-bottom: 30px; /* إضافة مسافة قبل الصورة */
+        padding-right: 0; 
+        margin-bottom: 30px; 
     }
 
     .hero-text p {
-        max-width: 100%; /* جعل الوصف يأخذ عرض كامل */
+        max-width: 100%; 
     }
 
     .hero h1 {
-        font-size: 2.5rem; /* تصغير الخط قليلاً للجوال */
+        font-size: 2.5rem; 
     }
 
     .hero-image img {
-        /* إزالة التأثير ثلاثي الأبعاد على الجوال لضمان العرض السليم */
-        transform: perspective(0) rotateY(0); 
+        transform: none; 
     }
 
-    /* 3. إصلاح قسم "عني" (لضمان التوسيط وإضافة هوامش) */
+    /* 3. إصلاح قسم "عني" */
     .about-container {
-        padding: 0 20px; /* إضافة بادينج جانبي */
-        text-align: center; /* توسيط النص */
+        padding: 0 20px; 
+        text-align: center; 
+    }
+    .about-text h2 {
+        text-align: center; 
     }
     .about-text h2::after {
-        right: 50%; /* توسيط الخط تحت العنوان */
+        right: 50%; 
         transform: translateX(50%);
     }
 
     /* 4. إضافة بادينج جانبي للمنتجات */
     .products-grid {
-        padding: 0 20px; /* إضافة هوامش جانبية حتى لا تلتصق البطاقات بحواف الشاشة */
+        padding: 0 20px; 
     }
     
     /* 5. تصغير العناوين الرئيسية قليلاً */
     h2 {
         font-size: 1.8rem;
     }
+
+    /* 6. تعديل نافذة السلة للجوال */
+    .cart-modal {
+        width: 95%; 
+        max-width: 380px; 
+    }
 }
 /* --- نهاية كود الجوال --- */
-
 </style>
 <body>
     <header>
@@ -518,7 +744,11 @@ hr{
                 <li><a class="btn-list" href="#products">المنتجات</a></li>
                 <li><a class="btn-list" href="#aboutMe">عني</a></li>
             </ul>
-        </nav>
+            <button class="cart-btn" id="open-cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-counter hidden" id="cart-counter">0</span>
+            </button>
+            </nav>
     </header>
     <section id="home" class="hero">
         <div class="container hero-content" bis_skin_checked="1">
@@ -543,7 +773,7 @@ hr{
         <img src="https://i.ibb.co/k244HRhJ/app.png" alt="تعديل الألوان" />
       </div>
       <div class="product-info">
-        <div class="product-name">تجربة</div>
+        <div class="product-name">تجربة 1</div>
         <div class="product-sub">Minecraft</div>
         <div class="product-desc">تجربة</div>
         <div class="product-price">
@@ -553,13 +783,12 @@ hr{
         <button class="btn btnproduct">أضف إلى السلة</button>
       </div>
     </div>
-
     <div class="product-card">
       <div class="product-image">
         <img src="https://i.ibb.co/k244HRhJ/app.png" alt="نظام متفاعل" />
       </div>
       <div class="product-info">
-        <div class="product-name">تجربة</div>
+        <div class="product-name">تجربة 2</div>
         <div class="product-sub">Minecraft</div>
         <div class="product-desc">تجربة</div>
         <div class="product-price">
@@ -569,13 +798,12 @@ hr{
         <button class="btn btnproduct">أضف إلى السلة</button>
       </div>
     </div>
-
     <div class="product-card">
       <div class="product-image">
         <img src="https://i.ibb.co/k244HRhJ/app.png" alt="تعديل سيارة" />
       </div>
       <div class="product-info">
-        <div class="product-name">تجربة</div>
+        <div class="product-name">تجربة 3</div>
         <div class="product-sub">Minecraft</div>
         <div class="product-desc">تجربة</div>
         <div class="product-price">
@@ -590,7 +818,7 @@ hr{
         <img src="https://i.ibb.co/k244HRhJ/app.png" alt="تعديل سيارة" />
       </div>
       <div class="product-info">
-        <div class="product-name">تجربة</div>
+        <div class="product-name">تجربة 4</div>
         <div class="product-sub">Minecraft</div>
         <div class="product-desc">تجربة</div>
         <div class="product-price">
@@ -621,5 +849,174 @@ hr{
     </div>
   </div>
 </section>
+
+<div id="cart-modal" class="cart-modal">
+    <div class="cart-header">
+        <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+        <button class="cart-close-btn" id="close-cart-btn">&times;</button>
+    </div>
+    
+    <div class="cart-body" id="cart-items">
+        <p class="cart-empty-msg">السلة فارغة حالياً.</p>
+    </div>
+    
+    <div class="cart-footer">
+        <a id="checkout-btn" href="#" class="btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> إتمام الطلب (المجموع: <span id="cart-total">0</span> ر.س)
+        </a>
+        <button id="clear-cart-btn" class="btn btn-outline">
+            <i class="fas fa-trash"></i> حذف كل المنتجات
+        </button>
+    </div>
+</div>
+<div id="cart-overlay" class="cart-overlay"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- 1. تعريف المتغيرات والعناصر ---
+    // ==== تعديل: جلب السلة من localstorage عند التحميل ====
+    let cart = JSON.parse(localStorage.getItem('abo0odiCart')) || [];
+    const phoneNumber = '966500187855'; 
+
+    // عناصر السلة
+    const cartModal = document.getElementById('cart-modal');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const openCartBtn = document.getElementById('open-cart-btn');
+    const closeCartBtn = document.getElementById('close-cart-btn');
+    const cartCounter = document.getElementById('cart-counter');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalSpan = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const clearCartBtn = document.getElementById('clear-cart-btn');
+
+    // أزرار إضافة المنتجات
+    const addToCartButtons = document.querySelectorAll('.btnproduct');
+
+    // --- وظيفة جديدة: حفظ السلة في localstorage ---
+    function saveCartToLocalStorage() {
+        localStorage.setItem('abo0odiCart', JSON.stringify(cart));
+    }
+
+    // --- 2. وظائف السلة الأساسية ---
+
+    /**
+     * وظيفة لتحديث واجهة السلة (العداد، القائمة، المجموع، ورابط الواتساب)
+     */
+    function updateCartUI() {
+        cartItemsContainer.innerHTML = '';
+        
+        let total = 0;
+        let whatsappMessage = "مرحباً، أرغب في طلب المنتجات التالية:\n\n";
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="cart-empty-msg">السلة فارغة حالياً.</p>';
+            cartCounter.classList.add('hidden');
+        } else {
+            cartCounter.classList.remove('hidden');
+            cartCounter.textContent = cart.length;
+
+            cart.forEach((item, index) => {
+                total += item.price; 
+                whatsappMessage += `*${index + 1}. ${item.name}*\n   - السعر: ${item.price.toFixed(2)} ر.س\n`;
+
+                const cartItemElement = document.createElement('div');
+                cartItemElement.classList.add('cart-item');
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-details">
+                        <p class="cart-item-name">${item.name}</p>
+                        <p class="cart-item-price">${item.price.toFixed(2)} ر.س</p>
+                    </div>
+                    <button class="cart-item-remove-btn" data-index="${index}">
+                        &times;
+                    </button>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+        }
+
+        cartTotalSpan.textContent = total.toFixed(2);
+        whatsappMessage += `\n*المجموع الكلي: ${total.toFixed(2)} ر.س*`;
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        checkoutBtn.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    }
+
+    /**
+     * وظيفة لإضافة منتج للسلة
+     */
+    function addToCart(product) {
+        cart.push(product);
+        updateCartUI();
+        saveCartToLocalStorage(); // ==== إضافة: حفظ السلة بعد الإضافة ====
+        
+        // وميض أيقونة السلة
+        openCartBtn.style.transform = 'scale(1.2)';
+        openCartBtn.style.color = 'var(--primary)';
+        setTimeout(() => {
+            openCartBtn.style.transform = 'scale(1)';
+            openCartBtn.style.color = 'var(--text-color)';
+        }, 300);
+    }
+
+    /**
+     * وظيفة لإزالة منتج من السلة (بناءً على موقعه في المصفوفة)
+     */
+    function removeFromCart(index) {
+        cart.splice(index, 1); 
+        updateCartUI();
+        saveCartToLocalStorage(); // ==== إضافة: حفظ السلة بعد الحذف ====
+    }
+
+    /**
+     * وظيفة لإفراغ السلة بالكامل
+     */
+    function clearCart() {
+        cart = []; 
+        updateCartUI();
+        saveCartToLocalStorage(); // ==== إضافة: حفظ السلة (فارغة) ====
+        closeCart(); 
+    }
+
+    // --- 3. وظائف فتح/إغلاق السلة ---
+    function openCart() {
+        cartModal.classList.add('open');
+        cartOverlay.classList.add('open');
+    }
+
+    function closeCart() {
+        cartModal.classList.remove('open');
+        cartOverlay.classList.remove('open');
+    }
+
+    // --- 4. ربط الأحداث (Event Listeners) ---
+    openCartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+    clearCartBtn.addEventListener('click', clearCart);
+
+    // إضافة المنتجات
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productCard = e.target.closest('.product-card');
+            const name = productCard.querySelector('.product-name').textContent;
+            const priceString = productCard.querySelector('.price').textContent;
+            const price = parseFloat(priceString.replace(' ر.س', '').trim());
+            const product = { name, price };
+            addToCart(product);
+        });
+    });
+
+    // حذف منتج واحد
+    cartItemsContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('cart-item-remove-btn')) {
+            const index = parseInt(e.target.dataset.index, 10);
+            removeFromCart(index);
+        }
+    });
+
+    // --- 5. التشغيل الأولي ---
+    updateCartUI(); // تحديث الواجهة عند تحميل الصفحة (سيعرض السلة المحفوظة)
+
+});
+</script>
 </body>
 </html>
