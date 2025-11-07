@@ -634,6 +634,46 @@ hr{
 /* --- نهاية إضافات السلة --- */
 
 
+/* ==== بداية كود زر الواتساب (الإضافة الجديدة) ==== */
+.whatsapp-support-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px; /* سيظهر أسفل اليمين */
+    width: 60px;
+    height: 60px;
+    background-color: #25D366; /* لون واتساب */
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    text-decoration: none;
+    z-index: 1000;
+    /* الظل المشع المطلوب */
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+    animation: whats-glow 1.5s infinite ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-support-btn:hover {
+    transform: scale(1.1); /* يكبر قليلاً عند تمرير الماوس */
+}
+
+@keyframes whats-glow {
+    0% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.8);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+    }
+}
+/* ==== نهاية كود زر الواتساب ==== */
+
+
 /* --- بداية كود الجوال (الإضافة الضرورية) --- */
 @media (max-width: 992px) {
     /* تعديل الهيدر ليصبح أكثر مرونة */
@@ -732,6 +772,15 @@ hr{
         width: 95%; 
         max-width: 380px; 
     }
+
+    /* 7. تعديل زر الواتساب للجوال (لتجنب التداخل) */
+    .whatsapp-support-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+    }
 }
 /* --- نهاية كود الجوال --- */
 </style>
@@ -790,6 +839,9 @@ hr{
   </div>
 </section>
 
+<a href="https://wa.me/966500187855?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A7%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9" class="whatsapp-support-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 <div id="cart-modal" class="cart-modal">
     <div class="cart-header">
         <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
@@ -1010,11 +1062,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
