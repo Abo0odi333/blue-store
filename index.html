@@ -254,12 +254,10 @@ hr{
 
 .products-grid {
       display: grid;
-      /* تعديل: غيرنا 1fr إلى 320px لتثبيت العرض الأقصى */
       grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
       gap: 25px;
       max-width: 1200px;
       margin: 0 auto;
-      /* إضافة: لتوسيط البطاقة إذا كانت وحيدة */
       justify-content: center;
     }
 
@@ -634,7 +632,7 @@ hr{
 /* --- نهاية إضافات السلة --- */
 
 
-/* ==== بداية كود زر الواتساب (الإضافة الجديدة) ==== */
+/* ==== بداية كود زر الواتساب ==== */
 .whatsapp-support-btn {
     position: fixed;
     bottom: 25px;
@@ -817,7 +815,7 @@ hr{
                 <h2>المنتجات</h2>
 <section id="products" class="product-section">
   <div class="products-grid">
-  </div>
+      </div>
 </section>
     <section id="aboutMe" class="about-section">
   <div class="about-container">
@@ -862,6 +860,7 @@ hr{
     </div>
 </div>
 <div id="cart-overlay" class="cart-overlay"></div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -880,11 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtn = document.getElementById('checkout-btn');
     const clearCartBtn = document.getElementById('clear-cart-btn');
     
-    // ==== إضافة: عنصر حاوية المنتجات ====
     const productsGrid = document.querySelector('.products-grid');
-
-    // ==== إضافة: رابط ملف Google Sheet (CSV) ====
-    // !! هام: استبدل الرابط هذا بالرابط الذي نسخته من خطوة "نشر على الويب"
     const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTlUSvrMbis618rLXVg4WVUmPeJ86o3H0wcyafL3i8sUlvTYawjL7lagu7fyzqeB0UFfD0w8f8to4l3/pub?gid=0&single=true&output=csv';
 
 
@@ -976,7 +971,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ==== وظيفة جديدة: لربط أزرار "أضف للسلة" التي تم إنشاؤها ====
+    // ==== وظيفة ربط أزرار "أضف للسلة" ====
     function setupAddToCartButtons() {
         const addToCartButtons = document.querySelectorAll('.btnproduct');
         
@@ -992,21 +987,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==== وظيفة جديدة: لتحويل بيانات CSV إلى منتجات HTML ====
+    // ==== وظيفة تحويل بيانات CSV إلى منتجات HTML (معدلة) ====
     function displayProducts(products) {
-        productsGrid.innerHTML = ''; // إفراغ رسالة "جاري التحميل"
+        productsGrid.innerHTML = ''; 
         
         products.forEach(product => {
-            // إنشاء كود HTML لكل بطاقة منتج
+            
+            // ==== بداية التعديل الجديد: تحديد الـ style ====
+            // نتأكد أن القيمة موجودة وليست فارغة
+            const nameStyle = (product.nameSize && product.nameSize.trim() !== '') 
+                ? `style="font-size: ${product.nameSize}"` 
+                : '';
+            
+            const descStyle = (product.descSize && product.descSize.trim() !== '') 
+                ? `style="font-size: ${product.descSize}"` 
+                : '';
+            // ==== نهاية التعديل الجديد ====
+
+            // إنشاء كود HTML (مع إضافة متغيرات الـ style)
             const productCardHTML = `
             <div class="product-card">
               <div class="product-image">
                 <img src="${product.imageURL}" alt="${product.name}" />
               </div>
               <div class="product-info">
-                <div class="product-name">${product.name}</div>
+                <div class="product-name" ${nameStyle}>${product.name}</div>
                 <div class="product-sub">${product.sub}</div>
-                <div class="product-desc">${product.desc}</div>
+                <div class="product-desc" ${descStyle}>${product.desc}</div>
                 <div class="product-price">
                   <span class="price">${parseFloat(product.price).toFixed(2)} ر.س</span>
                   <span class="old-price">${product.oldPrice}</span>
@@ -1015,36 +1022,37 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
             `;
-            // إضافة البطاقة إلى الحاوية
             productsGrid.innerHTML += productCardHTML;
         });
     }
 
-    // ==== وظيفة جديدة: لجلب المنتجات من Google Sheet ====
+    // ==== وظيفة جلب المنتجات (معدلة) ====
     async function fetchProducts() {
         try {
-            // إظهار رسالة تحميل مؤقتة
             productsGrid.innerHTML = '<p style="text-align:center; font-size: 1.2rem; color: var(--primary);">...جاري تحميل المنتجات...</p>';
             
-            const response = await fetch(googleSheetURL);
+            // إضافة كود لمنع التخزين المؤقت (Cache)
+            const response = await fetch(googleSheetURL + '&_t=' + new Date().getTime());
+            
             if (!response.ok) {
                 throw new Error('فشل الاتصال بملف البيانات');
             }
             
             const csvText = await response.text();
             
-            // تحويل النص (CSV) إلى مصفوفة من المنتجات
-            const lines = csvText.split('\n').slice(1); // نقسم بالأسطر ونتجاهل السطر الأول (العناوين)
-            const products = lines.map(line => {
-                const [name, sub, desc, price, oldPrice, imageURL] = line.trim().split(',');
-                // ملاحظة: هذا الكود البسيط يفترض عدم وجود فواصل (,) داخل الوصف أو الأسماء
-                return { name, sub, desc, price, oldPrice, imageURL };
-            }).filter(p => p.name); // فلترة أي أسطر فارغة
-
-            // عرض المنتجات
-            displayProducts(products);
+            // تحويل النص (CSV) إلى مصفوفة
+            const lines = csvText.split('\n').slice(1); 
             
-            // !! هام جداً: ربط أزرار "أضف للسلة" الجديدة بعد عرضها
+            const products = lines
+                .filter(line => line && line.trim() !== '') // فلتر لتجاهل الأسطر الفارغة
+                .map(line => {
+                    // ==== تعديل: قراءة 8 أعمدة بدلاً من 6 ====
+                    const [name, sub, desc, price, oldPrice, imageURL, nameSize, descSize] = line.trim().split(',');
+                    return { name, sub, desc, price, oldPrice, imageURL, nameSize, descSize };
+                })
+                .filter(p => p && p.name && p.name.trim() !== ''); // فلتر للتأكد من وجود اسم
+
+            displayProducts(products);
             setupAddToCartButtons();
 
         } catch (error) {
@@ -1055,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 5. التشغيل الأولي ---
-    fetchProducts(); // ==== تعديل: استدعاء وظيفة جلب المنتجات بدلاً من الكود القديم
+    fetchProducts(); 
     updateCartUI(); 
 
 });
